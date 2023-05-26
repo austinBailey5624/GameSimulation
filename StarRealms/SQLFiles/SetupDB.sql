@@ -160,8 +160,18 @@ VALUES
     (40, 13, 1, NULL, NULL, NULL), -- Mech World Primary Effect
     (41, 11, 1, NULL, NULL, NULL), -- Junkyard Primary Effect
     (42, 14, 1, NULL, NULL, NULL), -- Machine Base Primary Effect
-    (43, 15, 1, NULL, NULL, NULL); -- Brain World Primary Effect
-    
+    (43, 15, 1, NULL, NULL, NULL), -- Brain World Primary Effect
+    (44, 1,  2, 16,   1,    'BOTH'), -- Imperial Fighter effect
+    (45, 1,  1, 4,    1,    'BOTH'), -- Corvette effect
+    (46, 2,  1, 4,    1,    'BOTH'), -- Survey Ship Primary effect
+    (47, 16, 1, NULL, NULL, NULL), -- Target opponent discards a card
+    (48, 1,  4, 16,   1,    'BOTH'), -- Imperial Frigate primary
+    (49, 1,  4, 26,   1,    'BOTH'), -- Heavy cruiser primary
+    (50, 1,  5, 26,   1,    'BOTH'), -- Battle cruiser Primary
+    (51, 4,  1, 12,   1,    'BOTH'), -- Battle cruiser Scrap 
+    (52, 1,  7, 4,    1,    'BOTH'), -- Dreadnaught primary
+    (53, 2,  1, 17,   1,    'BOTH'), -- Recycling Station Primary
+    (54, 18, 1, NULL, NULL, NULL);
     
 
 INSERT INTO ability_type(ability_type_id, name, faction_id, primary_effect_id, ally_effect_id, scrap_effect_id)
@@ -191,30 +201,50 @@ VALUES
     (23,  'Mech World Ability',       2,    40,   NULL, NULL),
     (24,  'Junkyard Ability',         2,    41,   NULL, NULL),
     (25,  'Machine Base Ability',     2,    42,   NULL, NULL),
-    (26,  'Brain World Ability',      2,    43,   NULL, NULL);
+    (26,  'Brain World Ability',      2,    43,   NULL, NULL),
+    (27,  'Imperial Fighter Ability', 3,    44,   2,    NULL),
+    (28,  'Corvette Ability',         3,    45,   2,    NULL),
+    (29,  'Survey Ship ability',      3,    46,   NULL, 47),
+    (30,  'Imperial Frigate ability', 3,    48,   2,    26),
+    (31,  'Heavy Cruiser ability',    3,    49,   26,   NULL),
+    (32,  'Battle Cruiser ability',   3,    50,   47,   51),
+    (33,  'Dreadnaught ability',      3,    52,   NULL, 5),
+    (34,  'Space Station ability',    3,    2,    2,    14),
+    (35,  'Recycling Station Abilty', 3,    53,   NULL, NULL),
+    (36,  'War World ability',        3,    3,    4,    NULL),
+    (37,  'Royal Redoubt ability',    3,    3,    47,   NULL),
+    (38,  'Fleet HQ ability',         3,    54,   NULL, NULL);
+    
 
 
 -- Inserts the Ships
 INSERT INTO card(cost, faction_id, name, card_type_id, ability_type_id, version_id, num_cards_in_deck, flavor_text)
 VALUES
-	(0, NULL, 'Scout',          1, 1,  NULL, 8, NULL),
-    (0, NULL, 'Viper',          1, 2,  NULL, 2, NULL),
-    (2, NULL, 'Explorer',       1, 3,  NULL, 5, NULL),
-    (1, 1,    'Blob Fighter',   1, 4,  1,    3, 'Either kill it before it signals the hive or run. There are other choices, but none you\'ll live through'),
-    (2, 1,    'Battle Pod',     1, 5,  1,    2, NULL),
-    (2, 1,    'Trade Pod',      1, 6,  1,    3, 'The loading and offloading process is efficient, but disgusting'),
-    (3, 1,    'Ram',            1, 7,  1,    2, NULL),
-    (4, 1,    'Blob Destroyer', 1, 8,  1,    2, 'When this monstrous ship shows up on a colony\'s sensors, they know the end is near...'),
-    (6, 1,    'Battle Blob',    1, 9,  1,    1, NULL),
-    (6, 1,    'Blob Carrier',   1, 10, 1,    1, '" Is that ... a whale?" - HMS Defender, final transmission'),
-    (7, 1,    'Mothership',     1, 11, 1,    1, NULL),
-    (1, 2,    'Trade Bot',      1, 15, 1,    3, NULL),
-    (2, 2,    'Missle Bot',     1, 16, 1,    3, NULL),
-    (3, 2,    'Supply Bot',     1, 17, 1,    3, NULL),
-    (4, 2,    'Stealth Needle', 1, 18, 1,    1, NULL),
-    (4, 2,    'Patrol Mech',    1, 19, 1,    2, 'With the Blobs an ever present danger, even the Cult\'s cargo carrying mechs bristle with firepower'),
-    (5, 2,    'Battle Mech',    1, 20, 1,    1, NULL),
-    (6, 2,    'Missle Mech',    1, 21, 1,    1, NULL);
+	(0, NULL, 'Scout',            1, 1,  NULL, 8, NULL),
+    (0, NULL, 'Viper',            1, 2,  NULL, 2, NULL),
+    (2, NULL, 'Explorer',         1, 3,  NULL, 5, NULL),
+    (1, 1,    'Blob Fighter',     1, 4,  1,    3, 'Either kill it before it signals the hive or run. There are other choices, but none you\'ll live through'),
+    (2, 1,    'Battle Pod',       1, 5,  1,    2, NULL),
+    (2, 1,    'Trade Pod',        1, 6,  1,    3, 'The loading and offloading process is efficient, but disgusting'),
+    (3, 1,    'Ram',              1, 7,  1,    2, NULL),
+    (4, 1,    'Blob Destroyer',   1, 8,  1,    2, 'When this monstrous ship shows up on a colony\'s sensors, they know the end is near...'),
+    (6, 1,    'Battle Blob',      1, 9,  1,    1, NULL),
+    (6, 1,    'Blob Carrier',     1, 10, 1,    1, '" Is that ... a whale?" - HMS Defender, final transmission'),
+    (7, 1,    'Mothership',       1, 11, 1,    1, NULL),
+    (1, 2,    'Trade Bot',        1, 15, 1,    3, NULL),
+    (2, 2,    'Missle Bot',       1, 16, 1,    3, NULL),
+    (3, 2,    'Supply Bot',       1, 17, 1,    3, NULL),
+    (4, 2,    'Stealth Needle',   1, 18, 1,    1, NULL),
+    (4, 2,    'Patrol Mech',      1, 19, 1,    2, 'With the Blobs an ever present danger, even the Cult\'s cargo carrying mechs bristle with firepower'),
+    (5, 2,    'Battle Mech',      1, 20, 1,    1, NULL),
+    (6, 2,    'Missle Mech',      1, 21, 1,    1, NULL),
+    (1, 3,    'Imperial Fighter', 1, 27, 1,    3, NULL),
+    (2, 3,    'Corvette',         1, 28, 1,    2, NULL),
+    (3, 3,    'Survey Ship',      1, 29, 1,    3, NULL),
+    (3, 3,    'Imperial Frigate', 1, 30, 1,    3, NULL),
+    (5, 3,    'Heavy Cruiser',    1, 31, 1,    1, NULL),
+    (6, 3,    'Battlecruiser',    1, 32, 1,    1, NULL),
+    (7, 3,    'Dreadnaught',      1, 33, 1,    1, NULL);
     
 -- Inserts the Bases
 INSERT INTO card(cost, faction_id, name, card_type_id, ability_type_id, version_id, num_cards_in_deck, health, basetype, flavor_text)
@@ -226,9 +256,14 @@ VALUES
     (5, 2, 'Mech World',          2, 23, 1, 1, 6, 'OUTPOST', 'This man-made planet is a galactic center for open source tech'),
     (6, 2, 'Junkyard',            2, 24, 1, 1, 5, 'OUTPOST', 'The Machine Cult\'s first commandment: "Thou shalt not waste tech."'),
     (7, 2, 'Machine Base',        2, 25, 1, 1, 6, 'OUTPOST', 'This high-tech city is like a beehive: it looks chaotic but vital work is being done efficiently at a frenetic pace.'),
-    (8, 2, 'Brain World',         2, 26, 1, 1, 6, 'OUTPOST', 'The Machine Cult build these supercomputing space station sto run every aspect of their society. Now they worship them as gods.');
+    (8, 2, 'Brain World',         2, 26, 1, 1, 6, 'OUTPOST', 'The Machine Cult build these supercomputing space station sto run every aspect of their society. Now they worship them as gods.'),
+    (4, 3, 'Space Station',       2, 34, 1, 2, 4, 'OUTPOST', NULL),
+    (4, 3, 'Recycling Station',   2, 35, 1, 2, 4, 'OUTPOST', NULL),
+    (5, 3, 'War World',           2, 36, 1, 1, 4, 'OUTPOST', NULL),
+    (6, 3, 'Royal Redoubt',       2, 37, 1, 1, 6, 'OUTPOST', NULL),
+    (8, 3, 'Fleet HQ',            2, 38, 1, 1, 8, 'BASE', NULL);
     
-    select * from effect_type;
+
 
 
 -- SHOW COLUMNS FROM card;    
