@@ -86,7 +86,7 @@ CREATE TABLE effect(
 );
 
 CREATE TABLE ability_type(
-	ability_type_id INT PRIMARY KEY AUTO_INCREMENT,
+	ability_type_id INT PRIMARY KEY, -- AUTO INCREMENT
     name VARCHAR(50),
     faction_id INT, -- if the ability Type is ally ability, this tells the faction of the ally, will be null if not an ally ability
     primary_effect_id INT,-- effect of the primary ability
@@ -110,12 +110,11 @@ CREATE TABLE card(
     version_id INT DEFAULT 1,
     FOREIGN KEY(version_id) REFERENCES version(version_id),
     num_cards_in_deck INT NOT NULL DEFAULT 1,
-    flavor_text VARCHAR(128)
+    flavor_text VARCHAR(128),
+    -- below are only valid for ship types
+    health INT DEFAULT 0, 
+    baseType ENUM('NOT A BASE', 'BASE', 'OUTPOST') DEFAULT 'NOT A BASE'
 );
-
--- Select * from effect_type;
-
--- SHOW COLUMNS from effect;
 
 INSERT INTO effect(effect_id, effect_type_id, potency, effect_type_id_2, potency_2, relationship_between_effects)
 VALUES
@@ -147,26 +146,30 @@ VALUES
     (26, 4, 1, NULL, NULL, NULL), -- Draw 1 card, Blob Fighter ally
     (27, 5, 1, 1, 4, 'BOTH'),-- You may scrap a card in trade row, and 4 damage, Battle Pod primary
     (28, 6, 1, 5, 1, 'AND/OR'),
-    (29, 7, 1, NULL, NULL, NULL);
+    (29, 7, 1, NULL, NULL, NULL),
+    (30, 1, 6, 4, 1, 'BOTH'),
+    (31, 1, 5, 8, 1, 'OR'); -- Blob world primry effect
+    
 
-
--- SHOW COLUMNS from ability_type;
--- select * from effect;
-
-INSERT INTO ability_type(name, faction_id, primary_effect_id, ally_effect_id, scrap_effect_id)
+INSERT INTO ability_type(ability_type_id, name, faction_id, primary_effect_id, ally_effect_id, scrap_effect_id)
 VALUES
-	('scout ability',         NULL, 11, NULL, NULL),
-    ('viper ability',         NULL, 1,  NULL, NULL),
-    ('explorer ability',      NULL, 12, NULL, 2),
-    ('Blob Fighter ability',  1,    3,  26,   NULL),
-    ('Battle Pod ability',    1,    27, 2,    NULL),
-    ('Trade Pod ability',     1,    13, 2,    NULL),
-    ('Ram ability',           1,    5,  2,    13),
-    ('Blob Destroyer Ability',1,    6,  28,   NULL),
-    ('Battle Blob Ability',   1,    8,  26,   4),
-    ('Blob Carrier Ability',  1,    7,  29,   NULL);
+	( 1,   'scout ability',            NULL, 11, NULL, NULL),
+    ( 2,   'viper ability',            NULL, 1,  NULL, NULL),
+    ( 3,   'explorer ability',         NULL, 12, NULL, 2),
+    ( 4,   'Blob Fighter ability',     1,    3,  26,   NULL),
+    ( 5,   'Battle Pod ability',       1,    27, 2,    NULL),
+    ( 6,   'Trade Pod ability',        1,    13, 2,    NULL),
+    ( 7,   'Ram ability',              1,    5,  2,    13),
+    ( 8,   'Blob Destroyer Ability',   1,    6,  28,   NULL),
+    ( 9,   'Battle Blob Ability',      1,    8,  26,   4),
+    ( 10,  'Blob Carrier Ability',     1,    7,  29,   NULL),
+    ( 11,  'MotherShip Ability',       1,    30, 26,   NULL),
+    ( 12,  'Blob Wheel Ability',       1,    1,  NULL, 13),
+    ( 13,  'The Hive Ability',         1,    3,  26,   NULL),
+    ( 14,  'The Blob World',           1,    31, NULL, NULL);
 
 
+-- Inserts the Ships
 INSERT INTO card(cost, faction_id, name, card_type_id, ability_type_id, version_id, num_cards_in_deck, flavor_text)
 VALUES
 	(0, NULL, 'Scout',          1, 1,  NULL, 8, NULL),
@@ -178,7 +181,15 @@ VALUES
     (3, 1,    'Ram',            1, 7,  1,    2, NULL),
     (4, 1,    'Blob Destroyer', 1, 8,  1,    2, 'When this monstrous ship shows up on a colony\'s sensors, they know the end is near...'),
     (6, 1,    'Battle Blob',    1, 9,  1,    1, NULL),
-    (6, 1,    'Blob Carrier',   1, 10, 1,    1, '" Is that ... a whale?" - HMS Defender, final transmission');
+    (6, 1,    'Blob Carrier',   1, 10, 1,    1, '" Is that ... a whale?" - HMS Defender, final transmission'),
+    (7, 1,    'Mothership',     1, 11, 1,    1, NULL);
+    
+-- Inserts the Bases
+INSERT INTO card(cost, faction_id, name, card_type_id, ability_type_id, version_id, num_cards_in_deck, health, basetype, flavor_text)
+VALUES
+    (3, 1, 'Blob Wheel',          2, 12, 1, 3, 5, 'BASE', NULL),
+    (5, 1, 'The Hive',            2, 13, 1, 1, 5, 'BASE', NULL),
+    (8, 1, 'Blob World',          2, 14, 1, 1, 7, 'BASE', NULL);
     
     select * from effect_type;
 

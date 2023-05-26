@@ -1,0 +1,21 @@
+effect_type_id	name
+1	Damage
+2	Gold
+3	Authority
+4	Draw a card
+5	You may scrap a card in the trade row
+6	Destroy Target Base
+7	Acquire any ship for free and put it on top of your deck
+8	Draw a card for each Blob card you've played this turn
+9	You may scrap a card in your hand or discard pile
+10	Copy another ship you've played this turn
+11	Scrap a card in your hand or discard pile
+12	You may destroy target base
+13	Mech World counts as an ally for all factions
+14	Draw a card, then scrap a card in your hand
+15	Scrap up to two cards in your hand and/or discard pile, Draw a card for each card scrapped this way
+16	Target opponent discards a card
+17	Discard up to two cards, then draw that many cards
+18	Whenever you play a ship, gain one damage
+19	If you have two or more bases in play, draw two cards
+20	Put the next ship you acquire this turn on top of your deck
