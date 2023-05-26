@@ -1,5 +1,5 @@
 /*show databases;*/
-DROP DATABASE starRealms;
+DROP DATABASE IF EXISTS starRealms;
 CREATE DATABASE starRealms;
 USE starRealms;
 /*SELECT DATABASE;*/
@@ -118,55 +118,80 @@ CREATE TABLE card(
 
 INSERT INTO effect(effect_id, effect_type_id, potency, effect_type_id_2, potency_2, relationship_between_effects)
 VALUES
-	(1, 1, 1, NULL, NULL, NULL), -- 1 damage, Viper
-    (2, 1, 2, NULL, NULL, NULL), -- 2 damage, Explorer srap effect
-    (3, 1, 3, NULL, NULL, NULL), -- 3 damage, Blob fighter primary
-    (4, 1, 4, NULL, NULL, NULL), -- 4 Damage
-    (5, 1, 5, NULL, NULL, NULL), -- 5 Damage, Ram Primary
-    (6, 1, 6, NULL, NULL, NULL), -- 6 Damage, Blob Destroyer Primary
-    (7, 1, 7, NULL, NULL, NULL), -- 7 Damage
-    (8, 1, 8, NULL, NULL, NULL), -- 8 Damage
-    (9, 1, 9, NULL, NULL, NULL), -- 9 Damage
-    (10, 1, 10, NULL, NULL, NULL), -- 10 Damage
-    (11, 2, 1, NULL, NULL, NULL), -- Scout, one Gold
-    (12, 2, 2, NULL, NULL, NULL), -- explorer, two gold
-    (13, 2, 3, NULL, NULL, NULL), -- 3 gold, trade pod
-    (14, 2, 4, NULL, NULL, NULL),
-    (15, 2, 5, NULL, NULL, NULL),
-    (16, 2, 6, NULL, NULL, NULL),
-    (17, 2, 7, NULL, NULL, NULL),
-    (18, 2, 8, NULL, NULL, NULL), -- 8 gold (unused?)
-    (19, 3, 1, NULL, NULL, NULL), -- heal 1
-    (20, 3, 2, NULL, NULL, NULL), -- heal 2
-    (21, 3, 3, NULL, NULL, NULL), -- heal 3
-    (22, 3, 4, NULL, NULL, NULL), -- heal 4
-    (23, 3, 5, NULL, NULL, NULL), -- heal 5
-    (24, 3, 6, NULL, NULL, NULL), -- heal 6
-    (25, 3, 7, NULL, NULL, NULL), -- heal 7
-    (26, 4, 1, NULL, NULL, NULL), -- Draw 1 card, Blob Fighter ally
-    (27, 5, 1, 1, 4, 'BOTH'),-- You may scrap a card in trade row, and 4 damage, Battle Pod primary
-    (28, 6, 1, 5, 1, 'AND/OR'),
-    (29, 7, 1, NULL, NULL, NULL),
-    (30, 1, 6, 4, 1, 'BOTH'),
-    (31, 1, 5, 8, 1, 'OR'); -- Blob world primry effect
+	(1, 1,  1, NULL, NULL, NULL), -- 1 damage, Viper
+    (2, 1,  2, NULL, NULL, NULL), -- 2 damage, Explorer srap effect
+    (3, 1,  3, NULL, NULL, NULL), -- 3 damage, Blob fighter primary
+    (4, 1,  4, NULL, NULL, NULL), -- 4 Damage
+    (5, 1,  5, NULL, NULL, NULL), -- 5 Damage, Ram Primary
+    (6, 1,  6, NULL, NULL, NULL), -- 6 Damage, Blob Destroyer Primary
+    (7, 1,  7, NULL, NULL, NULL), -- 7 Damage
+    (8, 1,  8, NULL, NULL, NULL), -- 8 Damage
+    (9, 1,  9, NULL, NULL, NULL), -- 9 Damage
+    (10, 1,  10, NULL, NULL, NULL), -- 10 Damage
+    (11, 2,  1, NULL, NULL, NULL), -- Scout, one Gold
+    (12, 2,  2, NULL, NULL, NULL), -- explorer, two gold
+    (13, 2,  3, NULL, NULL, NULL), -- 3 gold, trade pod
+    (14, 2,  4, NULL, NULL, NULL),
+    (15, 2,  5, NULL, NULL, NULL),
+    (16, 2,  6, NULL, NULL, NULL),
+    (17, 2,  7, NULL, NULL, NULL),
+    (18, 2,  8, NULL, NULL, NULL), -- 8 gold (unused?)
+    (19, 3,  1, NULL, NULL, NULL), -- heal 1
+    (20, 3,  2, NULL, NULL, NULL), -- heal 2
+    (21, 3,  3, NULL, NULL, NULL), -- heal 3
+    (22, 3,  4, NULL, NULL, NULL), -- heal 4
+    (23, 3,  5, NULL, NULL, NULL), -- heal 5
+    (24, 3,  6, NULL, NULL, NULL), -- heal 6
+    (25, 3,  7, NULL, NULL, NULL), -- heal 7
+    (26, 4,  1, NULL, NULL, NULL), -- Draw 1 card, Blob Fighter ally
+    (27, 5,  1, 1,    4,    'BOTH'),-- You may scrap a card in trade row, and 4 damage, Battle Pod primary
+    (28, 6,  1, 5,    1,    'AND/OR'),
+    (29, 7,  1, NULL, NULL, NULL),
+    (30, 1,  6, 4,    1,    'BOTH'),
+    (31, 1,  5, 8,    1,    'OR'), -- Blob world primry effect
+    (32, 2,  1, 9,    1,    'BOTH'), -- Trade Bot primary effect
+    (33, 1,  2, 9,    1,    'BOTH'), -- Missle Bot Primary effect
+    (34, 2,  2, 9,    1,    'BOTH'), -- Supply Bot Primary Effect
+    (35, 10, 1, NULL, NULL, NULL), -- stealth needle copy
+    (36, 2,  3, 1,    5,    'OR'), -- Patrol Mech primary effect
+    (37, 11, 1, NULL, NULL, NULL), -- Patrol Mech secondary effect
+    (38, 1,  4, 9,    1,    'BOTH'), -- Battle Mech primary effect
+    (39, 1,  6, 12,   1,    'BOTH'), -- Missle Mech Primary effect
+    (40, 13, 1, NULL, NULL, NULL), -- Mech World Primary Effect
+    (41, 11, 1, NULL, NULL, NULL), -- Junkyard Primary Effect
+    (42, 14, 1, NULL, NULL, NULL), -- Machine Base Primary Effect
+    (43, 15, 1, NULL, NULL, NULL); -- Brain World Primary Effect
+    
     
 
 INSERT INTO ability_type(ability_type_id, name, faction_id, primary_effect_id, ally_effect_id, scrap_effect_id)
 VALUES
-	( 1,   'scout ability',            NULL, 11, NULL, NULL),
-    ( 2,   'viper ability',            NULL, 1,  NULL, NULL),
-    ( 3,   'explorer ability',         NULL, 12, NULL, 2),
-    ( 4,   'Blob Fighter ability',     1,    3,  26,   NULL),
-    ( 5,   'Battle Pod ability',       1,    27, 2,    NULL),
-    ( 6,   'Trade Pod ability',        1,    13, 2,    NULL),
-    ( 7,   'Ram ability',              1,    5,  2,    13),
-    ( 8,   'Blob Destroyer Ability',   1,    6,  28,   NULL),
-    ( 9,   'Battle Blob Ability',      1,    8,  26,   4),
-    ( 10,  'Blob Carrier Ability',     1,    7,  29,   NULL),
-    ( 11,  'MotherShip Ability',       1,    30, 26,   NULL),
-    ( 12,  'Blob Wheel Ability',       1,    1,  NULL, 13),
-    ( 13,  'The Hive Ability',         1,    3,  26,   NULL),
-    ( 14,  'The Blob World',           1,    31, NULL, NULL);
+	(1,   'scout ability',            NULL, 11,   NULL, NULL),
+    (2,   'viper ability',            NULL, 1,    NULL, NULL),
+    (3,   'explorer ability',         NULL, 12,   NULL, 2),
+    (4,   'Blob Fighter ability',     1,    3,    26,   NULL),
+    (5,   'Battle Pod ability',       1,    27,   2,    NULL),
+    (6,   'Trade Pod ability',        1,    13,   2,    NULL),
+    (7,   'Ram ability',              1,    5,    2,    13),
+    (8,   'Blob Destroyer Ability',   1,    6,    28,   NULL),
+    (9,   'Battle Blob Ability',      1,    8,    26,   4),
+    (10,  'Blob Carrier Ability',     1,    7,    29,   NULL),
+    (11,  'MotherShip Ability',       1,    30,   26,   NULL),
+    (12,  'Blob Wheel Ability',       1,    1,    NULL, 13),
+    (13,  'The Hive Ability',         1,    3,    26,   NULL),
+    (14,  'The Blob World Ability',   1,    31,   NULL, NULL),
+    (15,  'Trade Bot Ability',        2,    32,   2,    NULL),
+    (16,  'Missle Bot Ability',       2,    33,   2,    NULL),
+    (17,  'Supply Bot Ability',       2,    34,   2,    NULL),
+    (18,  'Stealth Needle Ability',   2,    35,   NULL, NULL),
+    (19,  'Patrol Mech Ability',      2,    36,   37,   NULL),
+    (20,  'Battle Mech Ability',      2,    38,   26,   NULL),
+    (21,  'Missle Mech Ability',      2,    39,   26,   NULL),
+    (22,  'Battle Station Ability',   2,    NULL, NULL, 5),
+    (23,  'Mech World Ability',       2,    40,   NULL, NULL),
+    (24,  'Junkyard Ability',         2,    41,   NULL, NULL),
+    (25,  'Machine Base Ability',     2,    42,   NULL, NULL),
+    (26,  'Brain World Ability',      2,    43,   NULL, NULL);
 
 
 -- Inserts the Ships
@@ -182,14 +207,26 @@ VALUES
     (4, 1,    'Blob Destroyer', 1, 8,  1,    2, 'When this monstrous ship shows up on a colony\'s sensors, they know the end is near...'),
     (6, 1,    'Battle Blob',    1, 9,  1,    1, NULL),
     (6, 1,    'Blob Carrier',   1, 10, 1,    1, '" Is that ... a whale?" - HMS Defender, final transmission'),
-    (7, 1,    'Mothership',     1, 11, 1,    1, NULL);
+    (7, 1,    'Mothership',     1, 11, 1,    1, NULL),
+    (1, 2,    'Trade Bot',      1, 15, 1,    3, NULL),
+    (2, 2,    'Missle Bot',     1, 16, 1,    3, NULL),
+    (3, 2,    'Supply Bot',     1, 17, 1,    3, NULL),
+    (4, 2,    'Stealth Needle', 1, 18, 1,    1, NULL),
+    (4, 2,    'Patrol Mech',    1, 19, 1,    2, 'With the Blobs an ever present danger, even the Cult\'s cargo carrying mechs bristle with firepower'),
+    (5, 2,    'Battle Mech',    1, 20, 1,    1, NULL),
+    (6, 2,    'Missle Mech',    1, 21, 1,    1, NULL);
     
 -- Inserts the Bases
 INSERT INTO card(cost, faction_id, name, card_type_id, ability_type_id, version_id, num_cards_in_deck, health, basetype, flavor_text)
 VALUES
-    (3, 1, 'Blob Wheel',          2, 12, 1, 3, 5, 'BASE', NULL),
-    (5, 1, 'The Hive',            2, 13, 1, 1, 5, 'BASE', NULL),
-    (8, 1, 'Blob World',          2, 14, 1, 1, 7, 'BASE', NULL);
+    (3, 1, 'Blob Wheel',          2, 12, 1, 3, 5, 'BASE',    NULL),
+    (5, 1, 'The Hive',            2, 13, 1, 1, 5, 'BASE',    NULL),
+    (8, 1, 'Blob World',          2, 14, 1, 1, 7, 'BASE',    NULL),
+    (3, 2, 'Battle Station',      2, 22, 1, 2, 5, 'OUTPOST', 'A Battle Station fusion core can double as a devestating weapon... once.'),
+    (5, 2, 'Mech World',          2, 23, 1, 1, 6, 'OUTPOST', 'This man-made planet is a galactic center for open source tech'),
+    (6, 2, 'Junkyard',            2, 24, 1, 1, 5, 'OUTPOST', 'The Machine Cult\'s first commandment: "Thou shalt not waste tech."'),
+    (7, 2, 'Machine Base',        2, 25, 1, 1, 6, 'OUTPOST', 'This high-tech city is like a beehive: it looks chaotic but vital work is being done efficiently at a frenetic pace.'),
+    (8, 2, 'Brain World',         2, 26, 1, 1, 6, 'OUTPOST', 'The Machine Cult build these supercomputing space station sto run every aspect of their society. Now they worship them as gods.');
     
     select * from effect_type;
 
