@@ -1,21 +1,50 @@
-effect_type_id	name
-1	Damage
-2	Gold
-3	Authority
-4	Draw a card
-5	You may scrap a card in the trade row
-6	Destroy Target Base
-7	Acquire any ship for free and put it on top of your deck
-8	Draw a card for each Blob card you've played this turn
-9	You may scrap a card in your hand or discard pile
-10	Copy another ship you've played this turn
-11	Scrap a card in your hand or discard pile
-12	You may destroy target base
-13	Mech World counts as an ally for all factions
-14	Draw a card, then scrap a card in your hand
-15	Scrap up to two cards in your hand and/or discard pile, Draw a card for each card scrapped this way
-16	Target opponent discards a card
-17	Discard up to two cards, then draw that many cards
-18	Whenever you play a ship, gain one damage
-19	If you have two or more bases in play, draw two cards
-20	Put the next ship you acquire this turn on top of your deck
+faction_id,name,num_cards_in_deck
+NULL,Scout,8
+NULL,Viper,2
+NULL,Explorer,5
+1,"Blob Fighter",3
+1,"Battle Pod",2
+1,"Trade Pod",3
+1,Ram,2
+1,"Blob Destroyer",2
+1,"Battle Blob",1
+1,"Blob Carrier",1
+1,Mothership,1
+1,"Blob Wheel",3
+1,"The Hive",1
+1,"Blob World",1
+2,"Trade Bot",3
+2,"Missle Bot",3
+2,"Supply Bot",3
+2,"Stealth Needle",1
+2,"Patrol Mech",2
+2,"Battle Mech",1
+2,"Missle Mech",1
+2,"Battle Station",2
+2,"Mech World",1
+2,Junkyard,1
+2,"Machine Base",1
+2,"Brain World",1
+3,Corvette,2
+3,"Survey Ship",3
+3,"Imperial Frigate",3
+3,"Heavy Cruiser",1
+3,Battlecruiser,1
+3,Dreadnaught,1
+3,"Imperial Fighter",3
+3,"Space Station",2
+3,"Recycling Station",2
+3,"War World",1
+3,"Royal Redoubt",1
+3,"Fleet HQ",1
+4,Cutter,3
+4,"Embassy Yacht",2
+4,Freighter,2
+4,"Trade Escort",1
+4,Flagship,1
+4,"Federation Shuttle",3
+4,"Trading Post",2
+4,"Barter World",2
+4,"Defense Center",1
+4,"Port of Call",1
+4,"Central Office",1
